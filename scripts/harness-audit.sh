@@ -67,6 +67,10 @@ TOTAL=0
 PASSED=0
 JSON_RESULTS="[]"
 
+json_escape() {
+    printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/\t/\\t/g'
+}
+
 check() {
     local category="$1"
     local id="$2"
@@ -83,9 +87,11 @@ check() {
     if [ "$JSON_MODE" -eq 1 ]; then
         local status="pass"
         [ "$result" -ne 0 ] && status="fail"
+        local esc_desc; esc_desc=$(json_escape "$description")
+        local esc_hint; esc_hint=$(json_escape "$fix_hint")
         JSON_RESULTS=$(echo "$JSON_RESULTS" | sed 's/]$//')
         [ "$TOTAL" -gt 1 ] && JSON_RESULTS="${JSON_RESULTS},"
-        JSON_RESULTS="${JSON_RESULTS}{\"category\":\"${category}\",\"id\":\"${category}${id}\",\"description\":\"${description}\",\"status\":\"${status}\",\"fix_hint\":\"${fix_hint}\"}]"
+        JSON_RESULTS="${JSON_RESULTS}{\"category\":\"${category}\",\"id\":\"${category}${id}\",\"description\":\"${esc_desc}\",\"status\":\"${status}\",\"fix_hint\":\"${esc_hint}\"}]"
     else
         if [ "$result" -eq 0 ]; then
             echo -e "  ${GREEN}✅${NC} ${BOLD}[$category$id]${NC} $description"

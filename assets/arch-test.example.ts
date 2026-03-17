@@ -127,10 +127,7 @@ describe("Architecture Constraints", () => {
       const fileLayerIdx = getLayerIndex(fileLayer);
       const importLayerIdx = getLayerIndex(importLayer);
 
-      // Higher-index layers should NOT import from lower-index layers
-      // Wait — it's the reverse: lower layers should not import from higher layers
-      // Actually: lower index = more foundational. Higher index = more specific.
-      // Rule: A layer can only import from layers with LOWER index.
+      // A layer can only import from layers with LOWER index (more foundational).
       if (importLayerIdx > fileLayerIdx) {
         violations.push({
           file,

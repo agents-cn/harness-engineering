@@ -159,7 +159,7 @@ See: docs/testing.md
 
 ---
 
-## 4. 纠正（Correct）——结构化错误恢复
+## 4. 纠正（Correct / R）——结构化错误恢复
 
 ### 原则
 

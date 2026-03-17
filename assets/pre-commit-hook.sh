@@ -1,6 +1,7 @@
 #!/bin/bash
 # Pre-commit hook template for Harness Engineering
-# Install: cp /path/to/harness-engineering/assets/pre-commit-hook.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+# Install: cp <skill-dir>/assets/pre-commit-hook.sh .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
+#   (replace <skill-dir> with the actual path to the harness-engineering skill directory)
 # Or use with simple-git-hooks/lefthook for team-wide enforcement.
 #
 # Principle: Every check here is a mechanical constraint.
